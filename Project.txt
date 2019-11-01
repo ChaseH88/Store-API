@@ -1,0 +1,16 @@
+==========================================
+================= Routes =================
+==========================================
+
+/api
+
+======== USERS ========
+/api/users ---------------- Return all the users
+/api/users/:id ------------ Return a user by their ID.
+/api/users/:id/edit ------- Edit the user by ID.
+/api/users/:id/delete ----- Delete user by ID.
+/api/users/signup --------- Creates new user and initialize login session.
+/api/users/login ---------- Lookup user by user/pass and start session.
+/api/users/signout -------- Signs the currently logged in user out, stops session.
+
+
