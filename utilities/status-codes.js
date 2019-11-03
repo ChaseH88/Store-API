@@ -1,0 +1,21 @@
+module.exports = {
+
+// ---- 2xx Success ----
+  SUCCESS_OK = 200,
+  SUCCESS_CREATED = 201,
+  SUCCESS_ACCEPTED = 202,
+  SUCCESS_NO_CONTENT = 204,
+
+// ---- 4xx Client Error ----
+  ERROR_BAD_REQUEST = 400,
+  ERROR_UNAUTHORIZED = 401,
+  ERROR_FORBIDDEN = 403,
+  ERROR_NOT_FOUND = 404,
+
+// ---- 5xx Server Error ----
+  ERROR_SERVER_ERROR = 500,
+  ERROR_NOT_IMPLEMENTED = 501,
+  ERROR_BAD_GATEWAY = 502,
+  ERROR_SERVICE_UNAVAILABLE = 503,
+
+}
