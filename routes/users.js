@@ -6,20 +6,23 @@ const { getAllUsers, getSingleUser, createNewUser, updateUser, deleteUser } =  r
  * URL: <HOST>/api/users
  */
 
-router.route(`/`).get(getAllUsers);
-router.route(`/:id`).get(getSingleUser);
-router.route(`/:id/edit`).put(updateUser);
-router.route(`/:id/delete`).delete(deleteUser);
+router
+  .route("/")
+    .get(getAllUsers);
+    
+router
+  .route("/:id")
+    .get(getSingleUser)
+    .put(updateUser)
+    .delete(deleteUser);
 
-router.get(`/:id/edit`, () => console.log("test"));
+router
+  .route("/signup")
+    .post(createNewUser);
+    
 
-router.delete(`/:id/delete`, () => console.log("test"));
-
-router.route(`/signup`).put(createNewUser);
-
-router.get(`/login`, () => console.log("test"));
-
-router.get(`/signout`, () => console.log("test"));
+// router.get(`/login`, () => console.log("test"));
+// router.get(`/signout`, () => console.log("test"));
 
 
 module.exports = router;

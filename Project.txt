@@ -7,8 +7,8 @@ ROOT: http://localhost:5000/
 ======== USERS ========
 /api/users ---------------- GET    - Return all the users
 /api/users/:id ------------ GET    - Return a user by their ID.
-/api/users/:id/edit ------- POST   - Edit the user by ID.
-/api/users/:id/delete ----- DELETE - Delete user by ID.
+/api/users/:id ------------ PUT    - Edit the user by ID.
+/api/users/:id ------------ DELETE - Delete user by ID.
 /api/users/signup --------- Creates new user and initialize login session.
 /api/users/login ---------- POST   - Lookup user by user/pass and start session.
 /api/users/signout -------- Signs the currently logged in user out, stops session.

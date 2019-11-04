@@ -19,6 +19,7 @@ app.use(express.json());
 
 // Routes
 const user_route = require("./routes/users");
+const location_route = require("./routes/locations");
 
 // Request Logger
 process.env.NODE_ENV === 'development' && ((() => {
@@ -27,7 +28,8 @@ process.env.NODE_ENV === 'development' && ((() => {
 })());
 
 // Use Routes
-app.use(`/api/users`, user_route); //
+app.use(`/api/users`, user_route);
+app.use(`/api/locations`, location_route);
 
 // Other Middleware
 app.use(errorHandler);
