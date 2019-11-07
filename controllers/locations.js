@@ -2,7 +2,7 @@ const Location = require("../models/location");
 const ErrorResponse = require("../utilities/errorResponse");
 const status = require("../utilities/status-codes");
 const asyncHandler = require("../middleware/async");
-
+const geocoder = require("../utilities/geocoder");
 /**
  * @description Get all locations
  * @method GET
@@ -117,4 +117,36 @@ exports.deleteLocation = asyncHandler(async (req, res, next) => {
     message: `Location has been deleted`
   });
   
+});
+
+
+
+/**
+ * @description Get locations within a radius. Accepts a zipcode and distance
+ * @method GET
+ * @route /api/locations/:zipcode/:distance
+ * @access Private
+ */
+exports.getLocationsInRadius = asyncHandler(async (req, res, next) => {
+
+  // Get params from user
+  const { zipcode:z, distance } = req.params;
+
+  // Get latitude and longitude
+  const { latitude:lat, longitude:lng } = await geocoder.geocode(z).reduce(d => d);
+
+  // Earth Radius 6378.1 km, 3955 miles
+  const radius = distance / 3963;
+  const locations = await Location.find({
+    location: { $geoWithin: { $centerSphere: [[ lng, lat ], radius ] } }
+  });
+
+  // Return the data
+  res.status(200).json({
+    success: true,
+    count: locations.length,
+    data: locations
+  });
+
+
 });

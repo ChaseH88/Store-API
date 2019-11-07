@@ -1,0 +1,14 @@
+[{
+  "name": "Blue T Shirt",
+  "description": "This is a nice blue t-shirt.",
+  "category": "shirts",
+  "brand": "Smith Designs",
+  "tags": "shirt",
+  "stockTotal": 101,
+  "itemNumber": 125482,
+  "price": 15.99,
+  "salePrice": 11.99,
+  "active": true,
+  "sale": false,
+  "clearance": false
+}]

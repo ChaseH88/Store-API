@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app",
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "drop-db": "node utilities/database-seeder.js -d",
+    "add-db": "node utilities/database-seeder.js -i"
   },
   "author": "",
   "license": "ISC",

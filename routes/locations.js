@@ -1,10 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { getAllLocations, getSingleLocation, createNewLocation, updateLocation, deleteLocation } =  require('../controllers/locations');
+
+// Controllers
+const { 
+  getAllLocations, 
+  getSingleLocation, 
+  createNewLocation, 
+  updateLocation, 
+  deleteLocation, 
+  getLocationsInRadius 
+} =  require('../controllers/locations');
 
 /**
  * URL: <HOST>/api/locations
  */
+
+router
+  .route("/:zipcode/:distance")
+  .get(getLocationsInRadius);
 
 router
   .route("/")

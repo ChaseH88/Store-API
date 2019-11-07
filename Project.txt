@@ -5,32 +5,32 @@
 ROOT: http://localhost:5000/
 
 ======== USERS ========
-/api/users ---------------- GET    - Return all the users
-/api/users/:id ------------ GET    - Return a user by their ID.
-/api/users/:id ------------ PUT    - Edit the user by ID.
-/api/users/:id ------------ DELETE - Delete user by ID.
-/api/users/signup --------- Creates new user and initialize login session.
-/api/users/login ---------- POST   - Lookup user by user/pass and start session.
-/api/users/signout -------- Signs the currently logged in user out, stops session.
-/api/users/password-reset-- 
+/api/users -------------------- GET    - Return all the users
+/api/users/:id ---------------- GET    - Return a user by their ID.
+/api/users/:id ---------------- PUT    - Edit the user by ID.
+/api/users/:id ---------------- DELETE - Delete user by ID.
+/api/users/signup ------------- Creates new user and initialize login session.
+/api/users/login -------------- POST   - Lookup user by user/pass and start session.
+/api/users/signout ------------ Signs the currently logged in user out, stops session.
+/api/users/password-reset------ 
 
 ======== LOCATIONS ========
-/api/images ---------------- Return all images.
-/api/images/:id ------------ Return an image by the ID.
-/api/images/:id/edit ------- Edit the image by ID.
-/api/images/:id/delete ----- Delete image by ID.
+/api/locations ---------------- Return all images.
+/api/locations/:id ------------ Return an image by the ID.
+/api/locations/:id ------------ Edit the image by ID.
+/api/locations/:id/delete ----- Delete image by ID.
 
 ======== IMAGES ========
-/api/images ---------------- Return all images.
-/api/images/:id ------------ Return an image by the ID.
-/api/images/:id/edit ------- Edit the image by ID.
-/api/images/:id/delete ----- Delete image by ID.
+/api/images ------------------- Return all images.
+/api/images/:id --------------- Return an image by the ID.
+/api/images/:id --------------- Edit the image by ID.
+/api/images/:id/delete -------- Delete image by ID.
 
 ======== PRODUCT ========
-/api/product ---------------- Return all products.
-/api/product/:id ------------ Return a product by the ID.
-/api/product/:id/edit ------- Edit the product by ID.
-/api/product/:id/delete ----- Delete product by ID.
+/api/product ------------------ Return all products.
+/api/product/:id -------------- Return a product by the ID.
+/api/product/:id -------------- Edit the product by ID.
+/api/product/:id/delete ------- Delete product by ID.
 
 
 

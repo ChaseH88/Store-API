@@ -1,3 +1,5 @@
+require("dotenv").config({ path: './config/config.env' }); // environment variables
+
 //============= STORE API =============
 const express = require("express");
 const app = express();
@@ -6,9 +8,7 @@ const errorHandler = require("./middleware/error");
 const morgan = require('morgan');
 
 // Config
-const dotenv = require("dotenv");
 const connectDB = require("./config/db"); // database Connection
-dotenv.config({ path: './config/config.env' }); // environment variables
 const _PORT = process.env.PORT || 6000; // port that the server is running on
 
 // connect to the database
@@ -20,6 +20,7 @@ app.use(express.json());
 // Routes
 const user_route = require("./routes/users");
 const location_route = require("./routes/locations");
+const product_route = require("./routes/products");
 
 // Request Logger
 process.env.NODE_ENV === 'development' && ((() => {
@@ -30,6 +31,7 @@ process.env.NODE_ENV === 'development' && ((() => {
 // Use Routes
 app.use(`/api/users`, user_route);
 app.use(`/api/locations`, location_route);
+app.use(`/api/products`, product_route);
 
 // Other Middleware
 app.use(errorHandler);
