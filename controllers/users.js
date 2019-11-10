@@ -11,8 +11,12 @@ const asyncHandler = require("../middleware/async");
  */
 exports.getAllUsers = asyncHandler(async (req, res, next) => {
   
-    const users = await User.find();
-    
+    const users = await User
+                          .find()
+                          .populate({ path: 'locations', model: 'Location', select: "location" })
+
+    console.log(users[0].locations)
+
     res.status(200).json({
       success: true,
       count: users.length,

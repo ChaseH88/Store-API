@@ -1,0 +1,34 @@
+[
+  {
+    "_id": "5dc84dff0c210179a4afc157",
+    "name": "shirt",
+    "display_name": "Shirts",
+    "description": "This is the main page for shirts.",
+    "icon": "water",
+    "owner": "5dc4e507d72cb83dac6d1181"
+  },
+  {
+    "_id": "5dc84dff0c210179a4afc158",
+    "name": "shoes",
+    "display_name": "Shoes",
+    "description": "This is the main page for shoes.",
+    "icon": "thunderbolt",
+    "owner": "5dc4e507d72cb83dac6d1182"
+  },
+  {
+    "_id": "5dc84dff0c210179a4afc159",
+    "name": "pants",
+    "display_name": "Pants",
+    "description": "This is the main page for pants.",
+    "icon": "water",
+    "owner": "5dc4e507d72cb83dac6d1181"
+  },
+  {
+    "_id": "5dc84dff0c210179a4afc15a",
+    "name": "other",
+    "display_name": "Other",
+    "description": "This is the main page for other stuff.",
+    "icon": "thunderbolt",
+    "owner": "5dc4e507d72cb83dac6d1182"
+  }
+]

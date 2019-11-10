@@ -4,18 +4,28 @@ const ProductSchema = new mongoose.Schema({
   name: {
     type: String
   },
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: [true, 'Please enter an author ID.']
+  },
   description: {
     type: String
   },
   category: {
-    type: String
+    type: mongoose.Schema.ObjectId,
+    ref: "Category",
+    required: [true, 'Please enter a category.']
   },
   brand: {
-    type: String
+    type: mongoose.Schema.ObjectId,
+    ref: "Brand",
+    required: [true, 'Please enter a brand.']
   },
-  tags: {
-    type: String
-  },
+  tags: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "Tag"
+  }],
   stockTotal: {
     type: Number,
     required: [true, 'Please the number in stock.'],

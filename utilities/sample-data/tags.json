@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "5dc6eb1101fc5c59dcdfd67c",
+    "name": "Bargain",
+    "description": "5dc4e507d72cb83dac6d1181",
+    "icon": "dollar",
+    "owner": "5dc4e507d72cb83dac6d1181",
+    "highlight": false
+  },
+  {
+    "_id": "5dc6eb1101fc5c59dcdfd67d",
+    "name": "Comfortable",
+    "description": "5dc4e507d72cb83dac6d1181",
+    "icon": "coffee",
+    "owner": "5dc4e507d72cb83dac6d1181",
+    "highlight": false
+  },
+  {
+    "_id": "5dc6eb1101fc5c59dcdfd67e",
+    "name": "Popular",
+    "description": "5dc4e507d72cb83dac6d1181",
+    "icon": "like",
+    "owner": "5dc4e507d72cb83dac6d1181",
+    "highlight": false
+  },
+  {
+    "_id": "5dc6eb1101fc5c59dcdfd67f",
+    "name": "Hot Item",
+    "description": "5dc4e507d72cb83dac6d1181",
+    "icon": "fire",
+    "owner": "5dc4e507d72cb83dac6d1181",
+    "highlight": false
+  },
+  {
+    "_id": "5dc6eb1101fc5c59dcdfd680",
+    "name": "Trendy",
+    "description": "5dc4e507d72cb83dac6d1181",
+    "icon": "rise",
+    "owner": "5dc4e507d72cb83dac6d1181",
+    "highlight": false
+  }
+]

@@ -1,14 +1,9 @@
 const Product = require("../models/product");
+const Tag = require("../models/tags");
 const ErrorResponse = require("../utilities/errorResponse");
 const status = require("../utilities/status-codes");
 const asyncHandler = require("../middleware/async");
 const { useFilters } = require("../utilities/use-filter");
-
-// Require Reference to Other Models for .populate()
-require("../models/category");
-require("../models/brand");
-require("../models/tags");
-
 
 /**
  * @description Get all products
@@ -32,18 +27,8 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
   let queryStr = useFilters(reqQuery, ['gt', 'gte', 'lt', 'lte', 'in']);
 
   // Search the database
-  query = Product
-            .find(queryStr)
-            .populate({ path: "tags", select: "name icon" })
-            .populate({ path: "brand", select: "name" })
-            .populate({ path: "category", select: "name icon" });
+  query = Product.find(queryStr);
 
-  /**
-   * IMPORTANT NOTE ABOUT POPULATE...YOU MUST
-   *  REQUIRE THE MODEL FOR THE 'ref' TO WORK
-   */
-
-  
   // Select fields
   if(req.query.select) {
     const fields = req.query.select.split(',').join(' ');
@@ -66,7 +51,10 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
   const total = await Product.countDocuments();
 
   query = query.skip(startIndex).limit(limit);
-  
+
+  // Add Tags
+  console.log(query);
+
   const products = await query;
   
   // Pagination Result
@@ -104,11 +92,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
  */
 exports.getSingleProduct = asyncHandler(async (req, res, next) => {
   
-    const product = await Product
-                            .findById(req.params.id)
-                            .populate({ path: "tags", select: "name icon" })
-                            .populate({ path: "brand", select: "name" })
-                            .populate({ path: "category", select: "name icon" });
+    const product = await Product.findById(req.params.id);
 
     // Not found
     if(!product){

@@ -47,6 +47,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  locations: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "Location"
+  }],
   slug: String
 }, { timestamps: true });
 

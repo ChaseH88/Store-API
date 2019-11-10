@@ -1,14 +1,106 @@
-[{
-  "name": "Blue T Shirt",
-  "description": "This is a nice blue t-shirt.",
-  "category": "shirts",
-  "brand": "Smith Designs",
-  "tags": "shirt",
-  "stockTotal": 101,
-  "itemNumber": 125482,
-  "price": 15.99,
-  "salePrice": 11.99,
-  "active": true,
-  "sale": false,
-  "clearance": false
-}]
+[
+  {
+    "author": "5dc4e507d72cb83dac6d1181",
+    "active": true,
+    "sale": false,
+    "clearance": false,
+    "locked": false,
+    "_id": "5dc4e509d72cb83dac6d1189",
+    "name": "Green T Shirt",
+    "description": "This is a nice green t-shirt.",
+    "category": "5dc84dff0c210179a4afc157",
+    "brand": "5dc84dfd0c210179a4afc153",
+    "tags": [
+      "5dc6eb1101fc5c59dcdfd67c",
+      "5dc6eb1101fc5c59dcdfd67d",
+      "5dc6eb1101fc5c59dcdfd67e"
+    ],
+    "stockTotal": 101,
+    "itemNumber": 122125482,
+    "price": 15.99,
+    "salePrice": 11.99
+  },
+  {
+    "author": "5dc4e507d72cb83dac6d1181",  
+    "active": true,
+    "sale": false,
+    "clearance": false,
+    "locked": false,
+    "_id": "5dc4e509d72cb83dac6d118a",
+    "name": "Yellow T Shirt",
+    "description": "This is a nice yellow t-shirt.",
+    "category": "5dc84dff0c210179a4afc157",
+    "brand": "5dc84dfd0c210179a4afc153",
+    "tags": [
+      "5dc6eb1101fc5c59dcdfd67c",
+      "5dc6eb1101fc5c59dcdfd67d",
+      "5dc6eb1101fc5c59dcdfd67e"
+    ],
+    "stockTotal": 17,
+    "itemNumber": 12543482,
+    "price": 17.99,
+    "salePrice": 16.99
+  },
+  {
+    "author": "5dc4e507d72cb83dac6d1181",  
+    "active": true,
+    "sale": false,
+    "clearance": false,
+    "locked": false,
+    "_id": "5dc4e509d72cb83dac6d118b",
+    "name": "White T Shirt",
+    "description": "This is a white blue t-shirt.",
+    "category": "5dc84dff0c210179a4afc157",
+    "brand": "5dc84dfd0c210179a4afc154",
+    "tags": [
+      "5dc6eb1101fc5c59dcdfd67c",
+      "5dc6eb1101fc5c59dcdfd67d",
+      "5dc6eb1101fc5c59dcdfd67e"
+    ],
+    "stockTotal": 75,
+    "itemNumber": 243542,
+    "price": 13.99,
+    "salePrice": 10.99
+  },
+  {
+    "author": "5dc4e507d72cb83dac6d1181",  
+    "active": true,
+    "sale": false,
+    "clearance": false,
+    "locked": false,
+    "_id": "5dc4e507d72cb83dac6d1183",
+    "name": "Blue T Shirt",
+    "description": "This is a nice blue t-shirt.",
+    "category": "5dc84dff0c210179a4afc157",
+    "brand": "5dc84dfd0c210179a4afc154",
+    "tags": [
+      "5dc6eb1101fc5c59dcdfd67c",
+      "5dc6eb1101fc5c59dcdfd680",
+      "5dc6eb1101fc5c59dcdfd67e"
+    ],
+    "stockTotal": 101,
+    "itemNumber": 125482,
+    "price": 15.99,
+    "salePrice": 11.99
+  },
+  {
+    "author": "5dc4e507d72cb83dac6d1182",  
+    "active": true,
+    "sale": false,
+    "clearance": false,
+    "locked": false,
+    "_id": "5dc4e509d72cb83dac6d1188",
+    "name": "Red T Shirt",
+    "description": "This is a nice red t-shirt.",
+    "category": "5dc84dff0c210179a4afc157",
+    "brand": "5dc84dfd0c210179a4afc154",
+    "tags": [
+      "5dc6eb1101fc5c59dcdfd67e",
+      "5dc6eb1101fc5c59dcdfd680"
+    ],
+    "stockTotal": 101,
+    "itemNumber": 1254655682,
+    "price": 15.99,
+    "salePrice": 11.99
+  }
+]

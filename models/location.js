@@ -37,7 +37,7 @@ LocationSchema.pre('save', async function(next){
 
   // Grab the data from the API
   const loc = await geocoder.geocode(this.address).reduce(data => data);
-  console.log(loc);
+  
   // Construct the Data
   this.location = {
     type: 'Point',
