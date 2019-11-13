@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const advancedResults = require("../middleware/advanced-results");
+const Product = require("../models/product");
 
 // Controllers
 const { 
@@ -14,14 +16,31 @@ const {
  * URL: <HOST>/api/products
  */
 
+
+// .populate({ path: "brand", select: "name" })
+// .populate({ path: "category", select: "name icon" });
+
+
 router
   .route("/")
-    .get(getAllProducts)
+    .get(advancedResults(Product,
+      [
+        { path: "tags", select: "name icon", model: "Tag" },
+        { path: "brand", select: "name", model: "Brand" },
+        { path: "category", select: "name icon", model: 'Category' }
+      ]
+    ), getAllProducts)
     .post(createNewProduct);
     
 router
   .route("/:id")
-    .get(getSingleProduct)
+    .get(advancedResults(Product,
+      [
+        { path: "tags", select: "name icon", model: "Tag" },
+        { path: "brand", select: "name", model: "Brand" },
+        { path: "category", select: "name icon", model: 'Category' }
+      ]
+    ), getSingleProduct)
     .put(updateProduct)
     .delete(deleteProduct);
 

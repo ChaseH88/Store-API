@@ -51,6 +51,14 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Location"
   }],
+  current_image: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Image"
+  },
+  images: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "Image"
+  }],
   slug: String
 }, { timestamps: true });
 

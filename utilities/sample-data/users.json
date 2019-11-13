@@ -13,6 +13,10 @@
     "locations": [
       "5dc871efcb513347b456efb1",
       "5dc871efcb513347b456efb2"
+    ],
+    "current_image": "5dcaab80bd70ef797cf9ef41",
+    "images": [
+      "5dcaab80bd70ef797cf9ef41"
     ]
 },
 {
@@ -28,6 +32,11 @@
     "lastName": "Johnson",
     "locations": [
       "5dc871efcb513347b456efb3"
+    ],
+    "current_image": "5dcab036b1e0fb96604f6b27",
+    "images": [
+      "5dcab036b1e0fb96604f6b27",
+      "5dcab036b1e0fb96604f6b26"
     ]
 },
 {

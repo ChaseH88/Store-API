@@ -2,6 +2,7 @@ const User = require("../models/user");
 const ErrorResponse = require("../utilities/errorResponse");
 const status = require("../utilities/status-codes");
 const asyncHandler = require("../middleware/async");
+const Image = require("../models/image");
 
 /**
  * @description Get all users
@@ -14,6 +15,8 @@ exports.getAllUsers = asyncHandler(async (req, res, next) => {
     const users = await User
                           .find()
                           .populate({ path: 'locations', model: 'Location', select: "location" })
+                          .populate({ path: 'images', model: 'Image', select: "name path alt" })
+                          .populate({ path: 'current_image', model: 'Image', select: "name path alt" });
 
     console.log(users[0].locations)
 
@@ -34,7 +37,10 @@ exports.getAllUsers = asyncHandler(async (req, res, next) => {
  */
 exports.getSingleUser = asyncHandler(async (req, res, next) => {
   
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id)
+                            .populate({ path: 'locations', model: 'Location', select: "location" })
+                            .populate({ path: 'images', model: 'Image', select: "name path alt" })
+                            .populate({ path: 'current_image', model: 'Image', select: "name path alt" });
 
     // Not found
     if(!user){
