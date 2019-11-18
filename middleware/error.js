@@ -7,11 +7,20 @@ const errorHandler = (err, req, res, next) => {
   error.message = err.message;
 
   // Log to console for dev
-  console.log(err);
+  console.log
+  (`======================================
+  ${err.name}
+  ======================================`);
 
   // Mongoose bad ObjectId
   if (err.name === 'CastError') {
-    const message = `Resource not found`;
+    const message = `Resource not found.`;
+    error = new ErrorResponse(message, status.ERROR_NOT_FOUND);
+  }
+
+  // Mongoose No Schema
+  if (err.name === 'MissingSchemaError') {
+    const message = `Resource not found.`;
     error = new ErrorResponse(message, status.ERROR_NOT_FOUND);
   }
 

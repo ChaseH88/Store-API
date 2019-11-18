@@ -3,7 +3,7 @@ const ErrorResponse = require("../utilities/errorResponse");
 const status = require("../utilities/status-codes");
 const asyncHandler = require("../middleware/async");
 const Image = require("../models/image");
-
+const mongoose = require("mongoose");
 /**
  * @description Get all users
  * @method GET
@@ -11,21 +11,7 @@ const Image = require("../models/image");
  * @access Public
  */
 exports.getAllUsers = asyncHandler(async (req, res, next) => {
-  
-    const users = await User
-                          .find()
-                          .populate({ path: 'locations', model: 'Location', select: "location" })
-                          .populate({ path: 'images', model: 'Image', select: "name path alt" })
-                          .populate({ path: 'current_image', model: 'Image', select: "name path alt" });
-
-    console.log(users[0].locations)
-
-    res.status(200).json({
-      success: true,
-      count: users.length,
-      data: users
-    });
-    
+    res.status(200).json(res.advancedResults);
 });
 
 
@@ -36,11 +22,13 @@ exports.getAllUsers = asyncHandler(async (req, res, next) => {
  * @access Public
  */
 exports.getSingleUser = asyncHandler(async (req, res, next) => {
-  
-    const user = await User.findById(req.params.id)
-                            .populate({ path: 'locations', model: 'Location', select: "location" })
-                            .populate({ path: 'images', model: 'Image', select: "name path alt" })
-                            .populate({ path: 'current_image', model: 'Image', select: "name path alt" });
+
+    const user = await User.findById(req.params.id).populate([
+      { path: 'locations', model: 'Location', select: "location" },
+      { path: 'images', model: 'Image', select: "name path alt" },
+      { path: 'current_image', model: 'Image', select: "name path alt" },
+      { path: 'role', model: 'Role', select: 'name actions' }
+    ])
 
     // Not found
     if(!user){
@@ -56,25 +44,6 @@ exports.getSingleUser = asyncHandler(async (req, res, next) => {
     });
 
 });
-
-
-/**
- * @description Create new user
- * @method POST
- * @route /api/users/signup
- * @access Public
- */
-exports.createNewUser = asyncHandler(async (req, res, next) => {
-    
-  const user = await User.create(req.body);
-  
-  res.status(201).json({
-    success: true,
-    data: user
-  });
-  
-});
-
 
 /**
  * @description Update existing user by ID

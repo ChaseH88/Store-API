@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please enter a password'],
-    maxlength: [20, 'Password cannot be longer than 20 characters.']
+    select: false
   },
   firstName: {
     type: String,
@@ -33,12 +33,6 @@ const UserSchema = new mongoose.Schema({
   lastLogin: [{
     type: Date
   }],
-  resetToken: {
-    type: String
-  },
-  resetTokenExpiry: {
-    type: Number
-  },
   active: {
     type: Boolean,
     default: true
@@ -59,7 +53,17 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Image"
   }],
-  slug: String
+  slug: String,
+  role: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Role"
+  },
+  resetToken: {
+    type: String
+  },
+  resetTokenExpiry: {
+    type: Date
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -20,6 +20,7 @@ const Image = require('../models/image');
 const Tag = require('../models/tags');
 const Brand = require('../models/brand');
 const Category = require('../models/category');
+const Role = require('../models/roles');
 
 // Connect to DB
 mongoose.connect(process.env.DATABASE_DEV, {
@@ -48,6 +49,7 @@ const images = getData("images");
 const tags = getData("tags");
 const brands = getData("brands");
 const categories = getData("categories");
+const roles = getData("roles");
 
 
 // Import into DB
@@ -61,6 +63,7 @@ const importData = async () => {
     await Tag.create(tags);
     await Brand.create(brands);
     await Category.create(categories);
+    await Role.create(roles);
     console.log('Data Imported...'.green.inverse);
     process.exit();
   } catch (err) {
@@ -80,6 +83,7 @@ const deleteData = async () => {
     await Tag.deleteMany();
     await Brand.deleteMany();
     await Category.deleteMany();
+    await Role.deleteMany();
     console.log('Data Destroyed...'.red.inverse);
     process.exit();
   } catch (err) {

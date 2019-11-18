@@ -6,7 +6,7 @@
     "_id": "5dc4e507d72cb83dac6d1181",
     "username": "admin",
     "email": "admin@test.com",
-    "password": "njkd4n64kjn6kjn",
+    "password": "admin",
     "firstName": "admin",
     "middleName": "admin",
     "lastName": "admin",
@@ -17,7 +17,8 @@
     "current_image": "5dcaab80bd70ef797cf9ef41",
     "images": [
       "5dcaab80bd70ef797cf9ef41"
-    ]
+    ],
+    "role": "5dd171e71f05e85a88d3a3c0"
 },
 {
     "lastLogin": [],
@@ -26,7 +27,7 @@
     "_id": "5dc4e507d72cb83dac6d1182",
     "username": "John2325",
     "email": "testing1@test.com",
-    "password": "njkd4n64kjn6kjn",
+    "password": "password",
     "firstName": "John",
     "middleName": "L",
     "lastName": "Johnson",
@@ -37,7 +38,8 @@
     "images": [
       "5dcab036b1e0fb96604f6b27",
       "5dcab036b1e0fb96604f6b26"
-    ]
+    ],
+    "role": "5dd171e61f05e85a88d3a3ba"
 },
 {
     "lastLogin": [],
@@ -46,9 +48,10 @@
     "_id": "5dc4e507d72cb83dac6d1183",
     "username": "GWill3255",
     "email": "testing2@test.com",
-    "password": "njkd4n64kjn6kjn",
+    "password": "password",
     "firstName": "Gary",
     "middleName": "Lane",
-    "lastName": "Williams"
+    "lastName": "Williams",
+    "role": "5dd171e61f05e85a88d3a3bc"
   }
 ]

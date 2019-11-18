@@ -1,28 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const { getAllUsers, getSingleUser, createNewUser, updateUser, deleteUser } =  require('../controllers/users');
+const { getAllUsers, getSingleUser, updateUser, deleteUser } =  require('../controllers/users');
+const User = require("../models/user");
+const advancedResults = require("../middleware/advanced-results");
+const { protect, authorize } = require('../middleware/auth');
+require("../models/roles");
 
 /**
  * URL: <HOST>/api/users
  */
-
 router
   .route("/")
-    .get(getAllUsers);
+    .get(advancedResults(User,
+      [
+        { path: 'locations', model: 'Location', select: "location" },
+        { path: 'images', model: 'Image', select: "name path alt" },
+        { path: 'current_image', model: 'Image', select: "name path alt" },
+        { path: 'role', model: 'Role', select: 'name actions' }
+      ]
+    ), protect, getAllUsers);
+
+    
     
 router
   .route("/:id")
-    .get(getSingleUser)
-    .put(updateUser)
-    .delete(deleteUser);
-
-router
-  .route("/signup")
-    .post(createNewUser);
-    
-
-// router.get(`/login`, () => console.log("test"));
-// router.get(`/signout`, () => console.log("test"));
-
+    .get(protect, getSingleUser)
+    .put(protect, updateUser)
+    .delete(protect, deleteUser);
 
 module.exports = router;

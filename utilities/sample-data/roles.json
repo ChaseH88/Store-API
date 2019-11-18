@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "5dd171e61f05e85a88d3a3ba",
+    "name": "user",
+    "description": "Basic account level access.",
+    "actions": [
+      {
+        "page": "products",
+        "privileges": ["read"]
+      }
+    ]
+  },
+  {
+    "_id": "5dd171e61f05e85a88d3a3bc",
+    "name": "employee",
+    "description": "Employee account level access.",
+    "actions": [
+      {
+        "page": "products",
+        "privileges": ["read"]
+      }
+    ]
+  },
+  {
+    "_id": "5dd171e71f05e85a88d3a3be",
+    "name": "manager",
+    "description": "Manager account level access.",
+    "actions": [
+      {
+        "page": "products",
+        "privileges": ["read", "write", "delete"]
+      }
+    ]
+  },
+  {
+    "_id": "5dd171e71f05e85a88d3a3c0",
+    "name": "admin",
+    "description": "Administrator.",
+    "actions": [
+      {
+        "page": "products",
+        "privileges": ["read", "write", "delete"]
+      }
+    ]
+  }
+]
