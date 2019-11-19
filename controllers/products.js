@@ -59,7 +59,7 @@ exports.getSingleProduct = asyncHandler(async (req, res, next) => {
  * @access Public
  */
 exports.createNewProduct = asyncHandler(async (req, res, next) => {
-
+  
   const product = await Product.create(req.body);
   
   res.status(201).json({

@@ -50,7 +50,7 @@ exports.authorize = (route_name, roles) => {
     }
 
     // Grab the Role Name and Actions/privileges
-    const { name, actions }= req.user.role;
+    const { name, actions } = req.user.role;
 
     // Admins skip all checks
     if(name === 'admin') return next();
@@ -76,7 +76,7 @@ exports.authorize = (route_name, roles) => {
 
         // Check if the user has correct priv
         let check = current_priv.privileges.some(_priv => (
-          priv[0].split(",").includes(_priv)
+          priv[0].includes(_priv)
         ));
   
         if(
@@ -102,3 +102,4 @@ exports.authorize = (route_name, roles) => {
 
   }
 }
+

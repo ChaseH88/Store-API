@@ -40,6 +40,10 @@
       {
         "page": "products",
         "privileges": ["read", "write", "delete"]
+      },
+      {
+        "page": "site",
+        "privileges": ["read", "write", "delete"]
       }
     ]
   }

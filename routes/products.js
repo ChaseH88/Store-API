@@ -16,18 +16,14 @@ const {
  * URL: <HOST>/api/products
  */
 
-
-// .populate({ path: "brand", select: "name" })
-// .populate({ path: "category", select: "name icon" });
-
-
-router
+ router
   .route("/")
     .get(advancedResults(Product,
       [
         { path: "tags", select: "name icon", model: "Tag" },
         { path: "brand", select: "name", model: "Brand" },
-        { path: "category", select: "name icon", model: 'Category' }
+        { path: "category", select: "name icon", model: 'Category' },
+        { path: "images", select: "name path alt", model: 'Image' }
       ]
     ), getAllProducts)
     .post(createNewProduct);
@@ -38,7 +34,8 @@ router
       [
         { path: "tags", select: "name icon", model: "Tag" },
         { path: "brand", select: "name", model: "Brand" },
-        { path: "category", select: "name icon", model: 'Category' }
+        { path: "category", select: "name icon", model: 'Category' },
+        { path: "images", select: "name path alt", model: 'Image' }
       ]
     ), getSingleProduct)
     .put(updateProduct)

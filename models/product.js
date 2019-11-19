@@ -26,6 +26,10 @@ const ProductSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Tag"
   }],
+  images: [{
+    type: mongoose.Schema.ObjectId,
+    ref: "Image"
+  }],
   stockTotal: {
     type: Number,
     required: [true, 'Please the number in stock.'],
@@ -59,5 +63,13 @@ const ProductSchema = new mongoose.Schema({
   },
   slug: String
 }, { timestamps: true });
+
+// Cascade delete images when product is deleted
+ProductSchema.pre('remove', async function(next){
+  console.log(this._id);
+  await this.model('Image').deleteMany({
+    images: this._id
+  });
+});
 
 module.exports = mongoose.model('Product', ProductSchema);

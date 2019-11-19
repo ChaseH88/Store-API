@@ -43,6 +43,7 @@ exports.getModelInfo = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {
+      model_name: model,
       model: collection.obj
     }
   });
@@ -50,5 +51,113 @@ exports.getModelInfo = asyncHandler(async (req, res, next) => {
 });
 
 
+
+/**
+ * 
+ */
+exports.getPrivileges = asyncHandler(async (req, res, next) => {
+
+  // Find the models
+  let models = await mongoose.modelNames();
+  if(!models) return next(new ErrorResponse('Something went wrong.', status.ERROR_SERVER_ERROR));
+
+  // Find the site admin privilege group
+  const admin = await mongoose.model('Role').findOne({ name: 'admin' });
+  if(!admin) return next(new ErrorResponse('Something went wrong.', status.ERROR_SERVER_ERROR));
+
+  // Build the permissions object
+  let privileges = new Promise((resolve, reject) => {
+    let actions = models.map((model) => {
+      return {
+        privileges: [ "read", "write", "delete" ],
+        page: model.toLowerCase()
+      }
+    });
+    actions.push({
+      privileges: [ "read", "write", "delete" ],
+      page: 'site'
+    });
+    resolve(actions);
+  });
+
+  // Update the Admin priviliges
+  privileges.then( async(result) => {
+
+    // Update the document
+    let actions = { actions: result };
+    let updatedAdmin = await admin.updateOne(actions);
+
+    if(!updatedAdmin) return next(new ErrorResponse('Something went wrong.', status.ERROR_SERVER_ERROR));
+
+    res.status(200).json({
+      success: true,
+      data: { message: "Privileges have been successfully updated." }
+    });
+
+  });
+
+});
+
+
+
+exports.getRoles = asyncHandler(async (req, res, next) => {
   
+  const roles = await mongoose.model('Role').find();
+
+  console.log(roles);
+
+  res.status(200).json({
+    success: true,
+    data: roles
+  });
+
+});
+
+
+
+exports.getRoleById = asyncHandler(async (req, res, next) => {
+  
+  const role = await mongoose.model('Role').findById(req.params.id);
+
+  res.status(200).json({
+    success: true,
+    data: role
+  });
+
+});
+
+
+
+exports.updateRoleById = asyncHandler(async (req, res, next) => {
+  
+  const role = await mongoose.model('Role').findById(req.params.id);
+
+  res.status(200).json({
+    success: true,
+    data: role
+  });
+
+});
+
+
+
+exports.deleteRoleById = asyncHandler(async (req, res, next) => {
+  
+  const role = await mongoose.model('Role').findById(req.params.id);
+
+  if(role.name.toLowerCase() === 'admin'){
+    return next(
+      new ErrorResponse('Cannot delete Administrator account.', status.ERROR_SERVER_ERROR)
+    );
+  }
+
+  await role.remove();
+
+  // Found and Return
+  res.status(200).json({
+    success: true,
+    message: `Role has been deleted`
+  });
+
+});
 
