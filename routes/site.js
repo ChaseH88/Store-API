@@ -10,7 +10,7 @@ const {
   deleteRoleById
 } =  require('../controllers/site');
 const { protect, authorize } = require('../middleware/auth');
-require("../models/roles");
+require("../models/role");
 
 // Permissions for this route
 const admin_role = [

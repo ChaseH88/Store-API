@@ -1,27 +1,20 @@
 const ErrorResponse = require('../utilities/errorResponse');
-const status = require('../utilities/status-codes');
 
 const errorHandler = (err, req, res, next) => {
   let error = { ...err };
 
   error.message = err.message;
 
-  // Log to console for dev
-  console.log
-  (`======================================
-  ${err.name}
-  ======================================`);
-
   // Mongoose bad ObjectId
   if (err.name === 'CastError') {
     const message = `Resource not found.`;
-    error = new ErrorResponse(message, status.ERROR_NOT_FOUND);
+    error = new ErrorResponse(message, 404);
   }
 
   // Mongoose No Schema
   if (err.name === 'MissingSchemaError') {
     const message = `Resource not found.`;
-    error = new ErrorResponse(message, status.ERROR_NOT_FOUND);
+    error = new ErrorResponse(message, 404);
   }
 
   // Mongoose duplicate key
@@ -36,7 +29,13 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, 400);
   }
 
-  res.status(error.statusCode || 500).json({
+  // Token Expired
+  if (err.name === 'TokenExpiredError') {
+    const message = 'Your session has expired. Please login again to continue.';
+    error = new ErrorResponse(message, 401);
+  }
+
+  res.status(500).json({
     success: false,
     error: error.message || 'Server Error'
   });

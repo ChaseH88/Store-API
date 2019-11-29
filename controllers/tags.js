@@ -1,5 +1,5 @@
 const Product = require("../models/product");
-const Tag = require("../models/tags");
+const Tag = require("../models/tag");
 const ErrorResponse = require("../utilities/errorResponse");
 const status = require("../utilities/status-codes");
 const asyncHandler = require("../middleware/async");
@@ -53,7 +53,6 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
   query = query.skip(startIndex).limit(limit);
 
   // Add Tags
-  console.log(query);
 
   const products = await query;
   

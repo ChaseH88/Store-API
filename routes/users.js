@@ -4,7 +4,7 @@ const { getAllUsers, getSingleUser, updateUser, deleteUser } =  require('../cont
 const User = require("../models/user");
 const advancedResults = require("../middleware/advanced-results");
 const { protect, authorize } = require('../middleware/auth');
-require("../models/roles");
+require("../models/role");
 
 /**
  * URL: <HOST>/api/users

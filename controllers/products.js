@@ -7,7 +7,7 @@ const { useFilters } = require("../utilities/use-filter");
 // Require Reference to Other Models for .populate()
 require("../models/category");
 require("../models/brand");
-require("../models/tags");
+require("../models/tag");
 
 
 /**

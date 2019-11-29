@@ -9,6 +9,8 @@ const errorHandler = require("./middleware/error");
 const morgan = require('morgan');
 const fileupload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // Config
 const connectDB = require("./config/db"); // database Connection
@@ -18,8 +20,10 @@ const _PORT = process.env.PORT || 6000; // port that the server is running on
 connectDB();
 
 // Middlewares
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(fileupload());
 app.use(express.static(path.join(__dirname, 'public')));
 

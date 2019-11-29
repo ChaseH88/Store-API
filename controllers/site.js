@@ -11,7 +11,11 @@ exports.getModels = asyncHandler(async (req, res, next) => {
     let models = mongoose.modelNames();
     if(!models) return next(new ErrorResponse('Something went wrong.', status.ERROR_SERVER_ERROR));
 
-    let data = models.map(m => m.toLowerCase());
+    let data = models.map(m => ({
+      role: m.toLowerCase(),
+      access: ['read', 'write', 'delete']
+    }));
+
     if(!data) return next(new ErrorResponse('Something went wrong.', status.ERROR_SERVER_ERROR));
 
     res.status(200).json({
@@ -99,13 +103,11 @@ exports.getPrivileges = asyncHandler(async (req, res, next) => {
 });
 
 
-
+// /api/site/roles
 exports.getRoles = asyncHandler(async (req, res, next) => {
   
   const roles = await mongoose.model('Role').find();
-
   console.log(roles);
-
   res.status(200).json({
     success: true,
     data: roles
@@ -114,7 +116,11 @@ exports.getRoles = asyncHandler(async (req, res, next) => {
 });
 
 
-
+/**
+ * Get role by ID
+ * @param id - ObjectID
+ * @returns Role with provided ID
+ */
 exports.getRoleById = asyncHandler(async (req, res, next) => {
   
   const role = await mongoose.model('Role').findById(req.params.id);
@@ -127,11 +133,17 @@ exports.getRoleById = asyncHandler(async (req, res, next) => {
 });
 
 
-
+/**
+ * Update the users role including the name and the actions
+ * @param id - ObjectID
+ * @returns Role with provided ID
+ */
 exports.updateRoleById = asyncHandler(async (req, res, next) => {
-  
-  const role = await mongoose.model('Role').findById(req.params.id);
 
+  const role = await mongoose.model('Role').findByIdAndUpdate(req.params.id, {
+    ...req.body
+  });
+  
   res.status(200).json({
     success: true,
     data: role
@@ -140,7 +152,11 @@ exports.updateRoleById = asyncHandler(async (req, res, next) => {
 });
 
 
-
+/**
+ * Delete the role with a given ID
+ * @param id - ObjectID
+ * @returns Message
+ */
 exports.deleteRoleById = asyncHandler(async (req, res, next) => {
   
   const role = await mongoose.model('Role').findById(req.params.id);

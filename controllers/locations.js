@@ -55,7 +55,7 @@ exports.getSingleLocation = asyncHandler(async (req, res, next) => {
  * @access Public
  */
 exports.createNewLocation = asyncHandler(async (req, res, next) => {
-    console.log(req.body)
+  
   const location = await Location.create(req.body);
   
   res.status(201).json({

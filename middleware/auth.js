@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('./async');
 const ErrorResponse = require('../utilities/errorResponse');
 const User = require('../models/user');
-require("../models/roles");
+const errorHandler = require("../middleware/error");
+require("../models/role");
 
 exports.protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -16,22 +17,23 @@ exports.protect = asyncHandler(async (req, res, next) => {
   // else if(req.cookies.token){
   //   token = req.cookies.token;
   // }
-
+  
   if(!token){
     return next(
       new ErrorResponse('Not Authorized.', 401)
     );
   }
 
+  const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+
   try {
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.id).populate({ path: "role", model: "Role" });
     next();
 
   }
   catch(err){
-    return next(new ErrorResponse('Not Authorized.', 401));
+    console.log(err);
   }
 
 });

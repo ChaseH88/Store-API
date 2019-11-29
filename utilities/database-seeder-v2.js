@@ -13,6 +13,17 @@ const colors = require('colors');
 require('dotenv').config({ path: `${__dirname}\\..\\config\\config.env` });
 
 // Load models
+require('../models');
+(async () => {
+  const models = await mongoose.modelNames();
+
+  console.log(models);
+})();
+
+
+return
+
+
 const User = require('../models/user');
 const Location = require('../models/location');
 const Product = require('../models/product');
@@ -55,39 +66,20 @@ const roles = getData("roles");
 // Import into DB
 const importData = async () => {
   try {
-    console.log('Importing JSON data...'.white.inverse)
-    await User.create(users);
-    await Location.create(locations);
-    await Product.create(products);
-    await Image.create(images);
-    await Tag.create(tags);
-    await Brand.create(brands);
-    await Category.create(categories);
-    await Role.create(roles);
-    console.log('Data Imported...'.green.inverse);
-    process.exit();
-  } catch (err) {
-    console.error(err);
-    console.log('Terminating Script'.red.inverse);
-    process.exit();
+    
+  }
+  catch(err){
+    
   }
 };
 
 // Delete data
 const deleteData = async () => {
   try {
-    await User.deleteMany();
-    await Location.deleteMany();
-    await Product.deleteMany();
-    await Image.deleteMany();
-    await Tag.deleteMany();
-    await Brand.deleteMany();
-    await Category.deleteMany();
-    await Role.deleteMany();
-    console.log('Data Destroyed...'.red.inverse);
-    process.exit();
-  } catch (err) {
-    console.error(err);
+    
+  }
+  catch(err){
+
   }
 };
 
