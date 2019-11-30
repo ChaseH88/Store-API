@@ -16,6 +16,12 @@ exports.getModels = asyncHandler(async (req, res, next) => {
       access: ['read', 'write', 'delete']
     }));
 
+    // Add the site role
+    data.push({
+      role: 'site',
+      access: ['read', 'write', 'delete']
+    })
+
     if(!data) return next(new ErrorResponse('Something went wrong.', status.ERROR_SERVER_ERROR));
 
     res.status(200).json({
@@ -107,7 +113,7 @@ exports.getPrivileges = asyncHandler(async (req, res, next) => {
 exports.getRoles = asyncHandler(async (req, res, next) => {
   
   const roles = await mongoose.model('Role').find();
-  console.log(roles);
+
   res.status(200).json({
     success: true,
     data: roles
@@ -139,9 +145,18 @@ exports.getRoleById = asyncHandler(async (req, res, next) => {
  * @returns Role with provided ID
  */
 exports.updateRoleById = asyncHandler(async (req, res, next) => {
+  
+console.log(
+`
 
-  const role = await mongoose.model('Role').findByIdAndUpdate(req.params.id, {
-    ...req.body
+${req.body}
+
+`
+);
+
+  let role = await mongoose.model('Role').findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
   });
   
   res.status(200).json({
