@@ -7,7 +7,8 @@ const {
   getRoles,
   getRoleById,
   updateRoleById,
-  deleteRoleById
+  deleteRoleById,
+  findAllUsersWithRole
 } =  require('../controllers/site');
 const { protect, authorize } = require('../middleware/auth');
 require("../models/role");
@@ -42,6 +43,9 @@ router
     .put(protect, authorize('site', admin_role), updateRoleById)
     .delete(protect, authorize('site', admin_role), deleteRoleById);
 
+router
+  .route("/get-users-by-role")
+    .get(protect, authorize('site', admin_role), findAllUsersWithRole)
 
 
 

@@ -12,7 +12,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   let reqQuery = { ...req.query };
 
   // Fields to exclude
-  const removeFields = ['select', 'page', 'limit', 'sort'];
+  const removeFields = ['where', 'select', 'page', 'limit', 'sort'];
 
   let params = removeFields.forEach(param => delete reqQuery[param]);
 
@@ -32,6 +32,13 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   if(req.query.select) {
     const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);
+  }
+
+  // Select fields
+  if(req.query.where) {
+    console.log(req.query.where);
+    // const fields = req.query.select.split(',').join(' ');
+    // query = query.select(fields);
   }
 
   // Sort

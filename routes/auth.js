@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createNewUser, login, getUser } =  require('../controllers/auth');
+const { createNewUser, login, getUser, logout } =  require('../controllers/auth');
 const User = require("../models/user");
 const advancedResults = require("../middleware/advanced-results");
 const { protect } = require("../middleware/auth");
@@ -20,6 +20,10 @@ router
 router
   .route("/login")
     .post(login)
+
+router
+  .route("/logout")
+    .get(protect, logout)
     
 
 // router.get(`/login`, () => console.log("test"));

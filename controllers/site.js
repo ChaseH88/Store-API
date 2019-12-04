@@ -192,3 +192,55 @@ exports.deleteRoleById = asyncHandler(async (req, res, next) => {
 
 });
 
+
+
+
+/**
+ * Delete the role with a given ID
+ * @param id - ObjectID
+ * @returns Message
+ */
+exports.findAllUsersWithRole = asyncHandler(async (req, res, next) => {
+  
+  const roles = await mongoose.model('Role').aggregate([
+    {
+      '$lookup': {
+        'from': 'users', 
+        'localField': '_id', 
+        'foreignField': 'role', 
+        'as': 'members'
+      }
+    }, {
+      '$unwind': {
+        'path': '$members'
+      }
+    }, {
+      '$project': {
+        'name': '$name', 
+        'members._id': 1, 
+        'members.username': 1, 
+        'members.email': 1, 
+        'members.createdAt': 1, 
+        'members.updatedAt': 1
+      }
+    }, {
+      '$group': {
+        '_id': '$$ROOT._id', 
+        'name': {
+          '$first': '$name'
+        }, 
+        'members': {
+          '$push': '$members'
+        }
+      }
+    }
+  ]);
+
+  // Found and Return
+  res.status(200).json({
+    success: true,
+    data: roles
+  });
+
+});
+

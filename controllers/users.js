@@ -48,7 +48,7 @@ exports.getSingleUser = asyncHandler(async (req, res, next) => {
 /**
  * @description Update existing user by ID
  * @method PUT
- * @route /api/users/signup
+ * @route /api/users/:id
  * @access Private
  */
 exports.updateUser = asyncHandler(async (req, res, next) => {
