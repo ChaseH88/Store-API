@@ -13,7 +13,11 @@ const RoleSchema = new mongoose.Schema({
   actions: [
     {
       page: { type: String },
-      privileges: [ String ]
+      privileges: [ String ],
+      access: {
+        type: Number,
+        default: 1
+      }
     }
   ],
 }, { timestamps: true });

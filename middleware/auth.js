@@ -40,10 +40,12 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
 /**
  * 
- * @param {*} route_name - String of the route/model
- * @param {*} roles - Options for what users can access what
+ * @param {*} route_name String- Name of the route/model/page - EX: 'example'
+ * @param {*} roles Array - Options for what users can access what - EX: ['read', 'write', 'delete']
+ * @param {*} access_level Number - The level of access required - EX: 3 
  */
-exports.authorize = (route_name, roles) => {
+exports.authorize = (route_name, roles, access_level) => {
+
   return (req, res, next) => {
     if(!req.user || !req.user.role){
       return(next(
@@ -55,7 +57,7 @@ exports.authorize = (route_name, roles) => {
     const { name, actions } = req.user.role;
 
     // Admins skip all checks
-    if(name === 'admin') return next();
+    //if(name === 'admin') return next();
 
     // Grab the current action on the user if it exist
     let current_priv = actions.filter(actions => (
@@ -72,17 +74,22 @@ exports.authorize = (route_name, roles) => {
     // Remove the single item array
     current_priv = current_priv.reduce(arr => arr);
 
+    // Check the access level with a boolean
+    const level_check = (current_priv.access >= access_level);
+    
     // Check the roles and decide what the response should be
     const check_user = new Promise((resolve, reject) => {
       roles.map(({ role, priv }) => {
-
+        
         // Check if the user has correct priv
         let check = current_priv.privileges.some(_priv => (
           priv[0].includes(_priv)
         ));
   
+        // Make sure all checks pass before authorizing
         if(
           check &&
+          level_check &&
           role === name &&
           actions.some((action) => action.page === route_name)
         ){

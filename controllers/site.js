@@ -63,7 +63,10 @@ exports.getModelInfo = asyncHandler(async (req, res, next) => {
 
 
 /**
- * 
+ * @description Update/Set the admin privileges
+ * @method GET
+ * @route /api/site/get-privileges
+ * @access Private
  */
 exports.getPrivileges = asyncHandler(async (req, res, next) => {
 
@@ -79,13 +82,15 @@ exports.getPrivileges = asyncHandler(async (req, res, next) => {
   let privileges = new Promise((resolve, reject) => {
     let actions = models.map((model) => {
       return {
-        privileges: [ "read", "write", "delete" ],
-        page: model.toLowerCase()
+        page: model.toLowerCase(),
+        access: 3,
+        privileges: [ "read", "write", "delete" ]
       }
     });
     actions.push({
-      privileges: [ "read", "write", "delete" ],
-      page: 'site'
+      page: 'site',
+      access: 3,
+      privileges: [ "read", "write", "delete" ]
     });
     resolve(actions);
   });
@@ -101,7 +106,7 @@ exports.getPrivileges = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: { message: "Privileges have been successfully updated." }
+      data: { message: "Admin privileges have been successfully updated." }
     });
 
   });

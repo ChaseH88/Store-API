@@ -6,7 +6,8 @@
     "actions": [
       {
         "page": "product",
-        "privileges": ["read"]
+        "privileges": ["read"],
+        "access": 1
       }
     ]
   },
@@ -17,7 +18,8 @@
     "actions": [
       {
         "page": "product",
-        "privileges": ["read"]
+        "privileges": ["read"],
+        "access": 2
       }
     ]
   },
@@ -28,7 +30,8 @@
     "actions": [
       {
         "page": "product",
-        "privileges": ["read", "write", "delete"]
+        "privileges": ["read", "write", "delete"],
+        "access": 3
       }
     ]
   },
@@ -39,11 +42,13 @@
     "actions": [
       {
         "page": "product",
-        "privileges": ["read", "write", "delete"]
+        "privileges": ["read", "write", "delete"],
+        "access": 3
       },
       {
         "page": "site",
-        "privileges": ["read", "write", "delete"]
+        "privileges": ["read", "write", "delete"],
+        "access": 3
       }
     ]
   }
