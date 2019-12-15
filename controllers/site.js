@@ -151,14 +151,6 @@ exports.getRoleById = asyncHandler(async (req, res, next) => {
  */
 exports.updateRoleById = asyncHandler(async (req, res, next) => {
   
-console.log(
-`
-
-${req.body}
-
-`
-);
-
   let role = await mongoose.model('Role').findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true

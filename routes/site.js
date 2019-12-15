@@ -28,25 +28,25 @@ router
 
 router
   .route("/models/:model")
-    .get(protect, authorize(page, admin_role), getModelInfo);
+    .get(protect, authorize(page, admin_role, 3), getModelInfo);
 
 router
   .route("/get-privileges")
-    .get(protect, authorize(page, admin_role), getPrivileges);
+    .get(protect, authorize(page, admin_role, 3), getPrivileges);
 
 router
   .route("/roles")
-    .get(protect, authorize(page, admin_role), getRoles);
+    .get(protect, authorize(page, admin_role, 3), getRoles);
 
 router
   .route("/role/:id")
-    .get(protect, authorize(page, admin_role), getRoleById)
-    .put(protect, authorize(page, admin_role), updateRoleById)
-    .delete(protect, authorize(page, admin_role), deleteRoleById);
+    .get(protect, authorize(page, admin_role, 3), getRoleById)
+    .put(protect, authorize(page, admin_role, 3), updateRoleById)
+    .delete(protect, authorize(page, admin_role, 3), deleteRoleById);
 
 router
   .route("/get-users-by-role")
-    .get(protect, authorize(page, admin_role), findAllUsersWithRole)
+    .get(protect, authorize(page, admin_role, 3), findAllUsersWithRole)
 
 
 

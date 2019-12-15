@@ -6,6 +6,8 @@ const errorHandler = require("../middleware/error");
 require("../models/role");
 
 exports.protect = asyncHandler(async (req, res, next) => {
+  
+  // Check for a token
   let token;
   if(
     req.headers.authorization &&
@@ -14,20 +16,19 @@ exports.protect = asyncHandler(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  // else if(req.cookies.token){
-  //   token = req.cookies.token;
-  // }
-  
+  // If no token, return the user
   if(!token){
     return next(
       new ErrorResponse('Not Authorized.', 401)
     );
   }
 
+  // Decode the token
   const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
   try {
 
+    // Add the user's information to the request payload
     req.user = await User.findById(decoded.id).populate({ path: "role", model: "Role" });
     next();
 
