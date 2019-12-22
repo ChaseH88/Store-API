@@ -2,6 +2,7 @@ const User = require("../models/user");
 const { hashPassword, signToken, comparePassword, sendToken } = require("../middleware/password");
 const asyncHandler = require("../middleware/async");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 /**
  * @description Create new user
@@ -103,4 +104,47 @@ exports.logout = asyncHandler(async (req, res, next) => {
     success: true,
     message: "You have successfully logged out."
   });
+});
+
+
+
+/**
+ * @description Returns an array of the user's permissions based on token
+ * @method POST
+ * @route /api/user/account/get-actions
+ * @access Public
+ */
+exports.getActions = asyncHandler(async (req, res, next) => {
+
+  if(!req.body.token){
+    res.status(200).json({
+      actions: []
+    });
+  }
+
+  const throwError = () => next(
+    new Error(`Something went wrong.`, 500)
+  )
+
+  // Decode the token
+  const token = req.body.token.replace('Bearer ', '');
+  const decoded = jwt.decode(token, {complete: true});
+
+  if(!decoded || !decoded.payload || !decoded.payload.id) throwError();
+
+  // Extract the user id and lookup the user
+  const { id } = decoded.payload;
+  const user = await User.findById(id); 
+
+  if(!user || !user.role) throwError();
+
+  // Lookup the role
+  const role = await mongoose.model('Role').findById(user.role);
+
+  if(!role || !role.actions) throwError();
+  
+  res.status(200).json({
+    actions: role.actions
+  });
+
 });

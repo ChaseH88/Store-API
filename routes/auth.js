@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createNewUser, login, getUser, logout } =  require('../controllers/auth');
+const { createNewUser, getActions, login, getUser, logout } =  require('../controllers/auth');
 const User = require("../models/user");
 const advancedResults = require("../middleware/advanced-results");
 const { protect } = require("../middleware/auth");
@@ -12,6 +12,10 @@ const { protect } = require("../middleware/auth");
 router
   .route("/")
     .get(protect, getUser);
+
+router
+  .route("/get-actions")
+    .post(getActions);
 
 router
   .route("/signup")
