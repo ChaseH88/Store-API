@@ -34,8 +34,8 @@ const errorHandler = (err, req, res, next) => {
     const message = 'Your session has expired. Please login again to continue.';
     error = new ErrorResponse(message, 401);
   }
-
-  res.status(500).json({
+  console.log(error)
+  res.status(error.statusCode || 500).json({
     success: false,
     error: error.message || 'Server Error'
   });

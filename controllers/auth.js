@@ -116,8 +116,11 @@ exports.logout = asyncHandler(async (req, res, next) => {
  */
 exports.getActions = asyncHandler(async (req, res, next) => {
 
-  if(!req.body.token){
-    res.status(200).json({
+  if(
+    !req.headers.authorization ||
+    !req.headers.authorization.startsWith('Bearer ')
+  ){
+    return res.status(200).json({
       actions: []
     });
   }
@@ -127,7 +130,7 @@ exports.getActions = asyncHandler(async (req, res, next) => {
   )
 
   // Decode the token
-  const token = req.body.token.replace('Bearer ', '');
+  const token = req.headers.authorization.replace('Bearer ', '');
   const decoded = jwt.decode(token, {complete: true});
 
   if(!decoded || !decoded.payload || !decoded.payload.id) throwError();

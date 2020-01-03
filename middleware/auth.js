@@ -13,18 +13,18 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ){
-    token = req.headers.authorization.split(' ')[1];
+    token = req.headers.authorization.replace('Bearer ', '');
   }
-
   // If no token, return the user
   if(!token){
     return next(
       new ErrorResponse('Not Authorized.', 401)
-    );
-  }
-
-  // Decode the token
-  const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+      );
+    }
+    
+    // Decode the token
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded)
 
   try {
 

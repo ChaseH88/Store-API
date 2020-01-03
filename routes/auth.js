@@ -15,7 +15,7 @@ router
 
 router
   .route("/get-actions")
-    .post(getActions);
+    .post(protect, getActions);
 
 router
   .route("/signup")
