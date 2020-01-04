@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllUsers, getSingleUser, updateUser, deleteUser } =  require('../controllers/users');
+const { getAllUsers, getSingleUser, getSingleUserByToken, updateUser, deleteUser } =  require('../controllers/users');
 const User = require("../models/user");
 const advancedResults = require("../middleware/advanced-results");
 const { protect, authorize } = require('../middleware/auth');
@@ -20,7 +20,9 @@ router
       ]
     ), protect, getAllUsers);
 
-    
+router
+  .route("/info")
+    .get(protect, getSingleUserByToken);    
     
 router
   .route("/:id")

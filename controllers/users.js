@@ -2,6 +2,7 @@ const User = require("../models/user");
 const ErrorResponse = require("../utilities/errorResponse");
 const status = require("../utilities/status-codes");
 const asyncHandler = require("../middleware/async");
+const jwt = require('jsonwebtoken');
 const Image = require("../models/image");
 const mongoose = require("mongoose");
 /**
@@ -44,6 +45,50 @@ exports.getSingleUser = asyncHandler(async (req, res, next) => {
     });
 
 });
+
+
+
+/**
+ * @description Returns basic user information based on the token in the req.header.authorization
+ * @method GET
+ * @route /api/users/info
+ * @access Private
+ */
+exports.getSingleUserByToken = asyncHandler(async (req, res, next) => {
+  
+  if(
+    !req.headers.authorization ||
+    !req.headers.authorization.startsWith('Bearer ')
+  ){
+    return res.status(200).json({
+      actions: []
+    });
+  }
+
+  const throwError = () => next(
+    new Error(`Something went wrong.`, 500)
+  )
+
+  // Decode the token
+  const token = req.headers.authorization.replace('Bearer ', '');
+  const decoded = jwt.decode(token, {complete: true});
+
+  if(!decoded || !decoded.payload || !decoded.payload.id) throwError();
+
+  // // Extract the user id and lookup the user
+  const { id } = decoded.payload;
+  const user = await User.findById(id).select("_id username email current_image"); 
+  
+  if(!user) throwError();
+  
+  res.status(200).json({
+    success: true,
+    user
+  });
+
+});
+
+
 
 /**
  * @description Update existing user by ID
